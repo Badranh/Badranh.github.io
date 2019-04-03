@@ -89,6 +89,16 @@
 
                </ul>
             </nav>
+                <script type="text/javascript"> 
+
+            var includeDiv = $("#content");
+            $(window).on('hashchange', function() {
+                var href = location.hash.slice(1) +".html";
+                alert(href);
+                includeDiv.load(href);
+            });
+         </script>
+         
             <!-- Page Content  -->
             <div id="content">
                         <!-- Bootstrap CSS CDN -->
@@ -110,9 +120,6 @@
          <div class="wrapper">
             <div id="content">
                <div id="particles-js">
-                <!--   <button type="button" id="sidebarCollapseQ" class="btn btn-info">
-                  <i class="fas fa-align-left"></i>
-                  </button> -->
                   <div id="intro">
                      <h1>Hi,</h1>
                         <h1>I'm Hasan,</h1>
@@ -120,8 +127,8 @@
                      <h1><span
                         class="txt-rotate"
                            data-period="2000"
-                               data-rotate='[ "Android", "IOS", "Game","Desktop Apps" ]'></span> </h1><h1> Developer.</h1>
-                     <div class="smali">Experienced In RxJava,Dependency Injection,Modern Design Patters : MVP MVVM,E2E Apps and much more</div> 
+                               data-rotate='[ "Android", "IOS", "Web Backend","Desktop Apps" ]'></span> </h1><h1> Developer.</h1>
+                     <div class="smali">Experienced In RxJava,Dependency Injection,Modern Design Patterns : MVP MVVM,E2E Apps,Microservices and much more</div> 
                   
                   </div>
                </div>
@@ -147,13 +154,7 @@
             
          </script>
          <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-         <script type="text/javascript"> 
-            var includeDiv = $("#particles-js");
-            $(window).on('hashchange', function() {
-                var href = location.hash.slice(1) +".html";
-                includeDiv.load('particles-js/'+href);
-            });
-         </script>
+       
 
 
          <script type="text/javascript">
@@ -217,22 +218,7 @@ window.onload = function() {
          </script>
          <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
-       <!--   <script type="text/javascript">
-             $(document).ready(function(){
-   
-   $('#content').load("home.html");
-
-});
-         </script> -->
-        <!--  <script type="text/javascript"> 
-
-            var includeDiv = $("#content");
-            $(window).on('hashchange', function() {
-                var href = location.hash.slice(1) +".html";
-                alert(href);
-                includeDiv.load(href);
-            });
-         </script> -->
+        
 
 
       </body>
