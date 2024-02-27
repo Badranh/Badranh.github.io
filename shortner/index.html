@@ -6,6 +6,16 @@
     <title>Ryd URLs</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://google.come">
+    <meta property="og:title" content="My Cool App">
+    <script>
+        window.onload = function() {
+            document.querySelector('meta[property="og:image"]').setAttribute('content', "/assets/voucher.png");
+        }
+    </script>
+
 </head>
 <body>
     <div class="overlay">
@@ -41,27 +51,6 @@
                     window.location.href = "rydapp://map"
                 });
         }
-
-        function showPreview(path) {
-            fetch('urls_previews.json')
-                .then(response => response.json())
-                .then(data => {
-                    var preview = data.previews[path];
-                    if (preview) {
-                        var metaTags = "<meta property='og:type' content='website'>" +
-                            "<meta property='og:url' content='" + window.location.href + "'>" +
-                            "<meta property='og:title' content='" + preview.title + "'>" +
-                            "<meta property='og:description' content='" + preview.description + "'>" +
-                            "<meta property='og:image' content='" + preview.image + "'>";
-                        document.head.insertAdjacentHTML('beforeend', metaTags);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching JSON file:', error);
-                    redirectFromJson(path);
-                });
-        }
-
         // Get id from query parameter and redirect
         var path = getParameterByName('to');
         showPreview(path);
