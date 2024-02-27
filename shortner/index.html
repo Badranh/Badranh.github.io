@@ -43,7 +43,7 @@
         }
 
         function showPreview(path) {
-            fetch('urls_preview.json')
+            fetch('urls_previews.json')
                 .then(response => response.json())
                 .then(data => {
                     var preview = data.previews[path];
