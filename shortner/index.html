@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryd URLs</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+<body>
+    <div class="overlay">
+        <img src="assets/spinner.png" alt="Loading Spinner" class="spinner">
+    </div>
+
+    <script>
+        // Function to parse query parameters from URL
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '=([^&]+)$');
+            results = regex.exec(url);
+            if (!results) return '';
+            if (!results[1]) return '';
+            return decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Function to fetch URL from JSON and redirect
+        function redirectFromJson(path) {
+            fetch('urls.json')
+                .then(response => response.json())
+                .then(data => {
+                    var redirectTo = data["default"]; // Default URL
+                    console.log(data);
+                    if (data[path]) {
+                        redirectTo = data[path];
+                    } 
+                    window.location.href = redirectTo;
+                })
+                .catch(error => {
+                    console.error('Error fetching JSON file:', error);
+                    window.location.href = "rydapp://map"
+                });
+        }
+
+         function showPreview(path) {
+            fetch('urls_preview.json')
+                .then(response => response.json())
+                .then(data => {
+                    var preview = data.previews[path];
+                    if (preview) {
+                        var previewHtml = "<h1>" + preview.title + "</h1>" + preview.content + "<img src='" + preview.image + "' alt='Preview Image'>";
+                        document.body.innerHTML = previewHtml;
+                    } else {
+                        redirectFromJson(path); // If no preview available, proceed with redirection
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching JSON file:', error);
+                    redirectFromJson(path);
+                });
+        }
+
+        // Get id from query parameter and redirect
+        var path = getParameterByName('to');
+        showPreview(path);
+        console.log(path);
+        if (path !== null) {
+            redirectFromJson(path);
+        } else {
+            window.location.href = "rydapp://map"
+        }
+    </script>
+</body>
+</html>
