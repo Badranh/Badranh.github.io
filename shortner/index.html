@@ -42,16 +42,18 @@
                 });
         }
 
-         function showPreview(path) {
+        function showPreview(path) {
             fetch('urls_preview.json')
                 .then(response => response.json())
                 .then(data => {
                     var preview = data.previews[path];
                     if (preview) {
-                        var previewHtml = "<h1>" + preview.title + "</h1>" + preview.content + "<img src='" + preview.image + "' alt='Preview Image'>";
-                        document.body.innerHTML = previewHtml;
-                    } else {
-                        redirectFromJson(path); // If no preview available, proceed with redirection
+                        var metaTags = "<meta property='og:type' content='website'>" +
+                            "<meta property='og:url' content='" + window.location.href + "'>" +
+                            "<meta property='og:title' content='" + preview.title + "'>" +
+                            "<meta property='og:description' content='" + preview.description + "'>" +
+                            "<meta property='og:image' content='" + preview.image + "'>";
+                        document.head.insertAdjacentHTML('beforeend', metaTags);
                     }
                 })
                 .catch(error => {
